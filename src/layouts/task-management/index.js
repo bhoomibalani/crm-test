@@ -41,14 +41,14 @@ import { taskTableData } from "./data";
 const TASK_STATUS = {
   PENDING: "pending",
   DONE: "done",
-  COMPLETED: "completed"
+  COMPLETED: "completed",
 };
 
 const TASK_PRIORITY = {
   LOW: "low",
   MEDIUM: "medium",
   HIGH: "high",
-  URGENT: "urgent"
+  URGENT: "urgent",
 };
 
 function TaskManagement() {
@@ -75,9 +75,9 @@ function TaskManagement() {
   };
 
   const handleStatusChange = (taskId, newStatus) => {
-    setTasks(prevTasks => 
-      prevTasks.map(task => 
-        task.id === taskId 
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
           ? { ...task, status: newStatus, updated_date: new Date().toISOString() }
           : task
       )
@@ -89,34 +89,43 @@ function TaskManagement() {
     setTasks(taskTableData.rows);
   }, []);
 
-  const filteredTasks = tasks.filter(task => {
-    const matchesSearch = 
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch =
       task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       task.assigned_to.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesStatus = statusFilter === "all" || task.status === statusFilter;
     const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter;
-    
+
     return matchesSearch && matchesStatus && matchesPriority;
   });
 
   const getStatusColor = (status) => {
     switch (status) {
-      case TASK_STATUS.COMPLETED: return "success";
-      case TASK_STATUS.DONE: return "info";
-      case TASK_STATUS.PENDING: return "warning";
-      default: return "default";
+      case TASK_STATUS.COMPLETED:
+        return "success";
+      case TASK_STATUS.DONE:
+        return "info";
+      case TASK_STATUS.PENDING:
+        return "warning";
+      default:
+        return "default";
     }
   };
 
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case TASK_PRIORITY.URGENT: return "error";
-      case TASK_PRIORITY.HIGH: return "warning";
-      case TASK_PRIORITY.MEDIUM: return "info";
-      case TASK_PRIORITY.LOW: return "success";
-      default: return "default";
+      case TASK_PRIORITY.URGENT:
+        return "error";
+      case TASK_PRIORITY.HIGH:
+        return "warning";
+      case TASK_PRIORITY.MEDIUM:
+        return "info";
+      case TASK_PRIORITY.LOW:
+        return "success";
+      default:
+        return "default";
     }
   };
 
@@ -129,7 +138,7 @@ function TaskManagement() {
     { Header: "Due Date", accessor: "due_date", width: "10%" },
   ];
 
-  const rows = filteredTasks.map(task => ({
+  const rows = filteredTasks.map((task) => ({
     title: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
         {task.title}
@@ -137,8 +146,8 @@ function TaskManagement() {
     ),
     description: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {task.description.length > 50 
-          ? `${task.description.substring(0, 50)}...` 
+        {task.description.length > 50
+          ? `${task.description.substring(0, 50)}...`
           : task.description
         }
       </MDTypography>
@@ -157,11 +166,7 @@ function TaskManagement() {
     ),
     status: (
       <Box display="flex" alignItems="center" gap={1}>
-        <Chip
-          label={task.status.toUpperCase()}
-          color={getStatusColor(task.status)}
-          size="small"
-        />
+        <Chip label={task.status.toUpperCase()} color={getStatusColor(task.status)} size="small" />
         {task.status === TASK_STATUS.PENDING && (
           <MDButton
             size="small"
@@ -201,9 +206,9 @@ function TaskManagement() {
                   Daily Task Management
                 </MDTypography>
                 {hasPermission("manage_tasks") && (
-                  <MDButton 
-                    variant="gradient" 
-                    color="info" 
+                  <MDButton
+                    variant="gradient"
+                    color="info"
                     size="small"
                     onClick={() => handleOpenDialog()}
                   >
@@ -278,9 +283,7 @@ function TaskManagement() {
 
       {/* Task Dialog */}
       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
-        <DialogTitle>
-          {selectedTask ? "Edit Task" : "Create New Task"}
-        </DialogTitle>
+        <DialogTitle>{selectedTask ? "Edit Task" : "Create New Task"}</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
             <Grid item xs={12} md={6}>

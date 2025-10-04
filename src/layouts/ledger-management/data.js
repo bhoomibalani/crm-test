@@ -18,13 +18,14 @@ export const ledgerTableData = {
       request_id: "LED-001",
       client_id: 1,
       client_name: "Client ABC",
-      request_details: "Monthly ledger statement for January 2024 with detailed transaction breakdown",
+      request_details:
+        "Monthly ledger statement for January 2024 with detailed transaction breakdown",
       status: "pending",
       request_date: "2024-01-15",
       requested_by: 4,
       uploaded_date: null,
       uploaded_by: null,
-      file_path: null
+      file_path: null,
     },
     {
       id: 2,
@@ -37,7 +38,7 @@ export const ledgerTableData = {
       requested_by: 6,
       uploaded_date: "2024-01-12",
       uploaded_by: 1,
-      file_path: "/ledgers/led-002-q4-2023.pdf"
+      file_path: "/ledgers/led-002-q4-2023.pdf",
     },
     {
       id: 3,
@@ -50,7 +51,7 @@ export const ledgerTableData = {
       requested_by: 4,
       uploaded_date: "2024-01-08",
       uploaded_by: 1,
-      file_path: "/ledgers/led-003-annual-2023.pdf"
+      file_path: "/ledgers/led-003-annual-2023.pdf",
     },
     {
       id: 4,
@@ -63,7 +64,7 @@ export const ledgerTableData = {
       requested_by: 4,
       uploaded_date: null,
       uploaded_by: null,
-      file_path: null
+      file_path: null,
     },
     {
       id: 5,
@@ -76,7 +77,7 @@ export const ledgerTableData = {
       requested_by: 6,
       uploaded_date: "2024-01-14",
       uploaded_by: 1,
-      file_path: "/ledgers/led-005-weekly-update.pdf"
-    }
-  ]
+      file_path: "/ledgers/led-005-weekly-update.pdf",
+    },
+  ],
 };

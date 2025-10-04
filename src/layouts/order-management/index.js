@@ -91,7 +91,7 @@ function OrderManagement() {
     { Header: "Actions", accessor: "actions", width: "10%", disableSortBy: true },
   ];
 
-  const rows = filteredOrders.map(order => ({
+  const rows = filteredOrders.map((order) => ({
     order_id: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
         #{order.order_id}
@@ -104,8 +104,8 @@ function OrderManagement() {
     ),
     order_details: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {order.order_details.length > 50 
-          ? `${order.order_details.substring(0, 50)}...` 
+        {order.order_details.length > 50
+          ? `${order.order_details.substring(0, 50)}...`
           : order.order_details
         }
       </MDTypography>
@@ -136,18 +136,8 @@ function OrderManagement() {
       </MDTypography>
     ),
     actions: (
-      <MDBox
-        display="flex"
-        alignItems="center"
-        mt={{ xs: 2, sm: 0 }}
-        ml={{ xs: -1.5, sm: 0 }}
-      >
-        <MDButton
-          variant="text"
-          color="dark"
-          size="small"
-          onClick={() => handleOpenDialog(order)}
-        >
+      <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
+        <MDButton variant="text" color="dark" size="small" onClick={() => handleOpenDialog(order)}>
           <Icon>edit</Icon>
         </MDButton>
         <MDButton variant="text" color="error" size="small">
@@ -169,9 +159,9 @@ function OrderManagement() {
                   Order Management
                 </MDTypography>
                 {hasPermission("create_orders") && (
-                  <MDButton 
-                    variant="gradient" 
-                    color="info" 
+                  <MDButton
+                    variant="gradient"
+                    color="info"
                     size="small"
                     onClick={() => handleOpenDialog()}
                   >
@@ -179,7 +169,7 @@ function OrderManagement() {
                   </MDButton>
                 )}
               </MDBox>
-              
+
               <Grid container spacing={2} mb={2}>
                 <Grid item xs={12} md={8}>
                   <MDInput
@@ -233,9 +223,7 @@ function OrderManagement() {
 
       {/* Order Dialog */}
       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
-        <DialogTitle>
-          {selectedOrder ? "Edit Order" : "Create New Order"}
-        </DialogTitle>
+        <DialogTitle>{selectedOrder ? "Edit Order" : "Create New Order"}</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
             <Grid item xs={12} md={6}>
@@ -244,7 +232,7 @@ function OrderManagement() {
                 <Select
                   value={selectedOrder?.client_id || ""}
                   label="Client Name"
-                  disabled={user?.role === "client"} // Auto-select for clients
+                  disabled={user?.role === "client"}
                 >
                   <MenuItem value="1">Client ABC</MenuItem>
                   <MenuItem value="2">Client XYZ</MenuItem>
@@ -256,9 +244,7 @@ function OrderManagement() {
               <FormControl fullWidth>
                 <InputLabel>Status</InputLabel>
                 <Select
-                  value={selectedOrder?.status || ORDER_STATUS.PENDING}
-                  label="Status"
-                >
+                  value={selectedOrder?.status || ORDER_STATUS.PENDING} label="Status">
                   <MenuItem value={ORDER_STATUS.PENDING}>Pending</MenuItem>
                   <MenuItem value={ORDER_STATUS.ORDERED_WITH_SUPPLIER}>
                     Ordered with Supplier

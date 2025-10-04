@@ -44,7 +44,7 @@ const ATTENDANCE_STATUS = {
   ABSENT: "absent",
   LATE: "late",
   HALF_DAY: "half_day",
-  LEAVE: "leave"
+  LEAVE: "leave",
 };
 
 function AttendanceManagement() {
@@ -56,7 +56,7 @@ function AttendanceManagement() {
   const [dateFilter, setDateFilter] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedAttendance, setSelectedAttendance] = useState(null);
-  const [currentDate] = useState(new Date().toISOString().split('T')[0]);
+  const [currentDate] = useState(new Date().toISOString().split("T")[0]);
 
   const openMenu = (event) => setMenu(event.currentTarget);
   const closeMenu = () => setMenu(null);
@@ -72,16 +72,20 @@ function AttendanceManagement() {
   };
 
   const handleMarkAttendance = (userId, status) => {
-    const today = new Date().toISOString().split('T')[0];
-    const existingRecord = attendance.find(record => 
-      record.user_id === userId && record.date === today
+    const today = new Date().toISOString().split("T")[0];
+    const existingRecord = attendance.find(
+      (record) => record.user_id === userId && record.date === today
     );
 
     if (existingRecord) {
-      setAttendance(prevAttendance => 
-        prevAttendance.map(record => 
-          record.id === existingRecord.id 
-            ? { ...record, status, check_in: status === ATTENDANCE_STATUS.ABSENT ? null : new Date().toISOString() }
+      setAttendance((prevAttendance) =>
+        prevAttendance.map((record) =>
+          record.id === existingRecord.id
+            ? {
+                ...record,
+                status,
+                check_in: status === ATTENDANCE_STATUS.ABSENT ? null : new Date().toISOString(),
+              }
             : record
         )
       );
@@ -95,20 +99,20 @@ function AttendanceManagement() {
         check_in: status === ATTENDANCE_STATUS.ABSENT ? null : new Date().toISOString(),
         check_out: null,
         hours_worked: 0,
-        remarks: ""
+        remarks: "",
       };
-      setAttendance(prevAttendance => [...prevAttendance, newRecord]);
+      setAttendance((prevAttendance) => [...prevAttendance, newRecord]);
     }
   };
 
   const handleCheckOut = (attendanceId) => {
-    setAttendance(prevAttendance => 
-      prevAttendance.map(record => 
-        record.id === attendanceId 
-          ? { 
-              ...record, 
+    setAttendance((prevAttendance) =>
+      prevAttendance.map((record) =>
+        record.id === attendanceId
+          ? {
+              ...record,
               check_out: new Date().toISOString(),
-              hours_worked: calculateHours(record.check_in, new Date().toISOString())
+              hours_worked: calculateHours(record.check_in, new Date().toISOString()),
             }
           : record
       )
@@ -119,7 +123,7 @@ function AttendanceManagement() {
     const start = new Date(checkIn);
     const end = new Date(checkOut);
     const diffMs = end - start;
-    const diffHours = Math.round(diffMs / (1000 * 60 * 60) * 10) / 10;
+    const diffHours = Math.round((diffMs / (1000 * 60 * 60)) * 10) / 10;
     return Math.max(0, diffHours);
   };
 
@@ -128,24 +132,29 @@ function AttendanceManagement() {
     setAttendance(attendanceTableData.rows);
   }, []);
 
-  const filteredAttendance = attendance.filter(record => {
-    const matchesSearch = 
-      record.user_name.toLowerCase().includes(searchTerm.toLowerCase());
-    
+  const filteredAttendance = attendance.filter((record) => {
+    const matchesSearch = record.user_name.toLowerCase().includes(searchTerm.toLowerCase());
+
     const matchesStatus = statusFilter === "all" || record.status === statusFilter;
     const matchesDate = !dateFilter || record.date === dateFilter;
-    
+
     return matchesSearch && matchesStatus && matchesDate;
   });
 
   const getStatusColor = (status) => {
     switch (status) {
-      case ATTENDANCE_STATUS.PRESENT: return "success";
-      case ATTENDANCE_STATUS.LATE: return "warning";
-      case ATTENDANCE_STATUS.HALF_DAY: return "info";
-      case ATTENDANCE_STATUS.ABSENT: return "error";
-      case ATTENDANCE_STATUS.LEAVE: return "secondary";
-      default: return "default";
+      case ATTENDANCE_STATUS.PRESENT:
+        return "success";
+      case ATTENDANCE_STATUS.LATE:
+        return "warning";
+      case ATTENDANCE_STATUS.HALF_DAY:
+        return "info";
+      case ATTENDANCE_STATUS.ABSENT:
+        return "error";
+      case ATTENDANCE_STATUS.LEAVE:
+        return "secondary";
+      default:
+        return "default";
     }
   };
 
@@ -159,7 +168,7 @@ function AttendanceManagement() {
     { Header: "Actions", accessor: "actions", width: "10%", disableSortBy: true },
   ];
 
-  const rows = filteredAttendance.map(record => ({
+  const rows = filteredAttendance.map((record) => ({
     user_name: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
         {record.user_name}
@@ -172,7 +181,7 @@ function AttendanceManagement() {
     ),
     status: (
       <Chip
-        label={record.status.replace('_', ' ').toUpperCase()}
+        label={record.status.replace("_", " ").toUpperCase()}
         color={getStatusColor(record.status)}
         size="small"
       />
@@ -195,19 +204,11 @@ function AttendanceManagement() {
     actions: (
       <Box display="flex" alignItems="center" gap={1}>
         {record.status === ATTENDANCE_STATUS.PRESENT && !record.check_out && (
-          <MDButton
-            size="small"
-            color="info"
-            onClick={() => handleCheckOut(record.id)}
-          >
+          <MDButton size="small" color="info" onClick={() => handleCheckOut(record.id)}>
             <Icon>logout</Icon>
           </MDButton>
         )}
-        <MDButton
-          size="small"
-          color="dark"
-          onClick={() => handleOpenDialog(record)}
-        >
+        <MDButton size="small" color="dark" onClick={() => handleOpenDialog(record)}>
           <Icon>edit</Icon>
         </MDButton>
       </Box>
@@ -252,7 +253,7 @@ function AttendanceManagement() {
                   </Button>
                 </Box>
               </MDBox>
-              
+
               <Grid container spacing={2} mb={2}>
                 <Grid item xs={12} md={4}>
                   <MDInput
@@ -337,7 +338,11 @@ function AttendanceManagement() {
                 fullWidth
                 type="time"
                 label="Check In Time"
-                value={selectedAttendance?.check_in ? new Date(selectedAttendance.check_in).toTimeString().slice(0, 5) : ""}
+                value={
+                  selectedAttendance?.check_in
+                    ? new Date(selectedAttendance.check_in).toTimeString().slice(0, 5)
+                    : ""
+                }
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -345,7 +350,11 @@ function AttendanceManagement() {
                 fullWidth
                 type="time"
                 label="Check Out Time"
-                value={selectedAttendance?.check_out ? new Date(selectedAttendance.check_out).toTimeString().slice(0, 5) : ""}
+                value={
+                  selectedAttendance?.check_out
+                    ? new Date(selectedAttendance.check_out).toTimeString().slice(0, 5)
+                    : ""
+                }
               />
             </Grid>
             <Grid item xs={12} md={6}>

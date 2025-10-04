@@ -22,9 +22,10 @@ export const salesReportTableData = {
       new_order: true,
       order_value: 15000,
       visit_photo: "https://via.placeholder.com/150x150/4CAF50/FFFFFF?text=Visit+1",
-      remarks: "Successful meeting, client interested in new product line. Discussed pricing and delivery terms.",
+      remarks:
+        "Successful meeting, client interested in new product line. Discussed pricing and delivery terms.",
       sales_person_id: 2,
-      created_date: "2024-01-15"
+      created_date: "2024-01-15",
     },
     {
       id: 2,
@@ -36,7 +37,7 @@ export const salesReportTableData = {
       visit_photo: "https://via.placeholder.com/150x150/2196F3/FFFFFF?text=Visit+2",
       remarks: "Follow-up visit for existing order. Client satisfied with current service.",
       sales_person_id: 2,
-      created_date: "2024-01-14"
+      created_date: "2024-01-14",
     },
     {
       id: 3,
@@ -46,9 +47,10 @@ export const salesReportTableData = {
       new_order: true,
       order_value: 8500,
       visit_photo: "https://via.placeholder.com/150x150/FF9800/FFFFFF?text=Visit+3",
-      remarks: "Initial meeting with new client. Showed product catalog and discussed requirements.",
+      remarks:
+        "Initial meeting with new client. Showed product catalog and discussed requirements.",
       sales_person_id: 5,
-      created_date: "2024-01-13"
+      created_date: "2024-01-13",
     },
     {
       id: 4,
@@ -60,7 +62,7 @@ export const salesReportTableData = {
       visit_photo: "https://via.placeholder.com/150x150/9C27B0/FFFFFF?text=Visit+4",
       remarks: "Contract renewal discussion. Client wants to expand current order volume.",
       sales_person_id: 2,
-      created_date: "2024-01-12"
+      created_date: "2024-01-12",
     },
     {
       id: 5,
@@ -72,7 +74,7 @@ export const salesReportTableData = {
       visit_photo: null,
       remarks: "Issue resolution visit. Addressed client concerns about delivery timeline.",
       sales_person_id: 5,
-      created_date: "2024-01-11"
+      created_date: "2024-01-11",
     },
     {
       id: 6,
@@ -84,7 +86,7 @@ export const salesReportTableData = {
       visit_photo: "https://via.placeholder.com/150x150/F44336/FFFFFF?text=Visit+6",
       remarks: "Product demonstration completed. Client impressed with quality and features.",
       sales_person_id: 2,
-      created_date: "2024-01-10"
-    }
-  ]
+      created_date: "2024-01-10",
+    },
+  ],
 };

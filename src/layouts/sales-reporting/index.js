@@ -86,14 +86,14 @@ function SalesReporting() {
     setReports(salesReportTableData.rows);
   }, []);
 
-  const filteredReports = reports.filter(report => {
-    const matchesSearch = 
+  const filteredReports = reports.filter((report) => {
+    const matchesSearch =
       report.client_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       report.remarks.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesDate = !dateFilter || report.visit_date === dateFilter;
     const matchesClient = clientFilter === "all" || report.client_id.toString() === clientFilter;
-    
+
     return matchesSearch && matchesDate && matchesClient;
   });
 
@@ -107,7 +107,7 @@ function SalesReporting() {
     { Header: "Actions", accessor: "actions", width: "5%", disableSortBy: true },
   ];
 
-  const rows = filteredReports.map(report => ({
+  const rows = filteredReports.map((report) => ({
     visit_date: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
         {new Date(report.visit_date).toLocaleDateString()}
@@ -153,20 +153,15 @@ function SalesReporting() {
     ),
     remarks: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {report.remarks.length > 30 
-          ? `${report.remarks.substring(0, 30)}...` 
+        {report.remarks.length > 30
+          ? `${report.remarks.substring(0, 30)}...`
           : report.remarks
         }
       </MDTypography>
     ),
     actions: (
       <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
-        <MDButton 
-          variant="text" 
-          color="dark" 
-          size="small"
-          onClick={() => handleOpenDialog(report)}
-        >
+        <MDButton variant="text" color="dark" size="small" onClick={() => handleOpenDialog(report)}>
           <Icon>edit</Icon>
         </MDButton>
         <MDButton variant="text" color="error" size="small">
@@ -188,9 +183,9 @@ function SalesReporting() {
                   Sales Person Reporting
                 </MDTypography>
                 {hasPermission("manage_reports") && (
-                  <MDButton 
-                    variant="gradient" 
-                    color="info" 
+                  <MDButton
+                    variant="gradient"
+                    color="info"
                     size="small"
                     onClick={() => handleOpenDialog()}
                   >
@@ -198,7 +193,7 @@ function SalesReporting() {
                   </MDButton>
                 )}
               </MDBox>
-              
+
               <Grid container spacing={2} mb={2}>
                 <Grid item xs={12} md={4}>
                   <MDInput
@@ -321,7 +316,7 @@ function SalesReporting() {
               </MDTypography>
               <input
                 accept="image/*"
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 id="visit-photo-upload"
                 type="file"
                 onChange={handleImageUpload}

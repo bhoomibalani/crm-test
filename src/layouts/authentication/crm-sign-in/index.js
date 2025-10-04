@@ -101,10 +101,7 @@ function Cover() {
               />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox
-                checked={rememberMe}
-                onChange={handleSetRememberMe}
-              />
+              <Checkbox checked={rememberMe} onChange={handleSetRememberMe} />
               <MDTypography
                 variant="button"
                 fontWeight="regular"
@@ -123,13 +120,7 @@ function Cover() {
               </MDBox>
             )}
             <MDBox mt={4} mb={1}>
-              <MDButton
-                variant="gradient"
-                color="info"
-                fullWidth
-                type="submit"
-                disabled={loading}
-              >
+              <MDButton variant="gradient" color="info" fullWidth type="submit" disabled={loading}>
                 {loading ? "Signing in..." : "sign in"}
               </MDButton>
             </MDBox>

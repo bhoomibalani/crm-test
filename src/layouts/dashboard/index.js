@@ -60,7 +60,7 @@ function Dashboard() {
                     Welcome back, {user?.name || "User"}!
                   </MDTypography>
                   <MDTypography variant="body2" color="text">
-                    Here's what's happening with your CRM today.
+                    Here&apos;s what&apos;s happening with your CRM today.
                   </MDTypography>
                 </MDBox>
                 <MDBox>
@@ -68,7 +68,7 @@ function Dashboard() {
                     variant="gradient"
                     color="info"
                     size="small"
-                    onClick={() => window.location.href = "/user-management"}
+                    onClick={() => (window.location.href = "/user-management")}
                   >
                     <Icon>people</Icon>&nbsp;Manage Users
                   </MDButton>

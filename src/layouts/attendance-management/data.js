@@ -23,7 +23,7 @@ export const attendanceTableData = {
       check_in: "2024-01-15T09:00:00Z",
       check_out: "2024-01-15T18:00:00Z",
       hours_worked: 9.0,
-      remarks: ""
+      remarks: "",
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ export const attendanceTableData = {
       check_in: "2024-01-15T08:30:00Z",
       check_out: "2024-01-15T17:30:00Z",
       hours_worked: 9.0,
-      remarks: ""
+      remarks: "",
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ export const attendanceTableData = {
       check_in: "2024-01-15T10:15:00Z",
       check_out: "2024-01-15T19:15:00Z",
       hours_worked: 9.0,
-      remarks: "Traffic jam on the way"
+      remarks: "Traffic jam on the way",
     },
     {
       id: 4,
@@ -56,7 +56,7 @@ export const attendanceTableData = {
       check_in: "2024-01-14T09:00:00Z",
       check_out: "2024-01-14T18:00:00Z",
       hours_worked: 9.0,
-      remarks: ""
+      remarks: "",
     },
     {
       id: 5,
@@ -67,7 +67,7 @@ export const attendanceTableData = {
       check_in: "2024-01-14T09:00:00Z",
       check_out: "2024-01-14T13:00:00Z",
       hours_worked: 4.0,
-      remarks: "Personal appointment"
+      remarks: "Personal appointment",
     },
     {
       id: 6,
@@ -78,7 +78,7 @@ export const attendanceTableData = {
       check_in: null,
       check_out: null,
       hours_worked: 0,
-      remarks: "Sick leave"
+      remarks: "Sick leave",
     },
     {
       id: 7,
@@ -89,7 +89,7 @@ export const attendanceTableData = {
       check_in: "2024-01-13T09:00:00Z",
       check_out: "2024-01-13T18:00:00Z",
       hours_worked: 9.0,
-      remarks: ""
+      remarks: "",
     },
     {
       id: 8,
@@ -100,7 +100,7 @@ export const attendanceTableData = {
       check_in: "2024-01-13T08:30:00Z",
       check_out: "2024-01-13T17:30:00Z",
       hours_worked: 9.0,
-      remarks: ""
+      remarks: "",
     },
     {
       id: 9,
@@ -111,7 +111,7 @@ export const attendanceTableData = {
       check_in: "2024-01-13T09:00:00Z",
       check_out: "2024-01-13T18:00:00Z",
       hours_worked: 9.0,
-      remarks: ""
-    }
-  ]
+      remarks: "",
+    },
+  ],
 };

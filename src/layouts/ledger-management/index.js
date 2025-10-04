@@ -41,7 +41,7 @@ import { ledgerTableData } from "./data";
 const LEDGER_STATUS = {
   PENDING: "pending",
   UPLOADED: "uploaded",
-  CONFIRMED: "confirmed"
+  CONFIRMED: "confirmed",
 };
 
 function LedgerManagement() {
@@ -118,7 +118,7 @@ function LedgerManagement() {
     { Header: "Actions", accessor: "actions", width: "10%", disableSortBy: true },
   ];
 
-  const rows = filteredLedgers.map(ledger => ({
+  const rows = filteredLedgers.map((ledger) => ({
     request_id: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
         #{ledger.request_id}
@@ -131,8 +131,8 @@ function LedgerManagement() {
     ),
     request_details: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {ledger.request_details.length > 50 
-          ? `${ledger.request_details.substring(0, 50)}...` 
+        {ledger.request_details.length > 50
+          ? `${ledger.request_details.substring(0, 50)}...`
           : ledger.request_details
         }
       </MDTypography>
@@ -161,12 +161,7 @@ function LedgerManagement() {
       </MDTypography>
     ),
     actions: (
-      <MDBox
-        display="flex"
-        alignItems="center"
-        mt={{ xs: 2, sm: 0 }}
-        ml={{ xs: -1.5, sm: 0 }}
-      >
+      <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
         {ledger.status === LEDGER_STATUS.PENDING && hasPermission("upload_ledgers") && (
           <MDButton
             variant="text"
@@ -220,9 +215,9 @@ function LedgerManagement() {
                   Ledger Request Management
                 </MDTypography>
                 {hasPermission("request_ledgers") && (
-                  <MDButton 
-                    variant="gradient" 
-                    color="info" 
+                  <MDButton
+                    variant="gradient"
+                    color="info"
                     size="small"
                     onClick={handleOpenRequestDialog}
                   >
@@ -230,7 +225,7 @@ function LedgerManagement() {
                   </MDButton>
                 )}
               </MDBox>
-              
+
               <Grid container spacing={2} mb={2}>
                 <Grid item xs={12} md={8}>
                   <MDInput

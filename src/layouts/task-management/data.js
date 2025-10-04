@@ -23,7 +23,7 @@ export const taskTableData = {
       status: "pending",
       due_date: "2024-01-20",
       created_date: "2024-01-15",
-      created_by: 1
+      created_by: 1,
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export const taskTableData = {
       status: "done",
       due_date: "2024-01-18",
       created_date: "2024-01-10",
-      created_by: 1
+      created_by: 1,
     },
     {
       id: 3,
@@ -47,7 +47,7 @@ export const taskTableData = {
       status: "completed",
       due_date: "2024-01-15",
       created_date: "2024-01-08",
-      created_by: 1
+      created_by: 1,
     },
     {
       id: 4,
@@ -59,7 +59,7 @@ export const taskTableData = {
       status: "pending",
       due_date: "2024-01-16",
       created_date: "2024-01-14",
-      created_by: 1
+      created_by: 1,
     },
     {
       id: 5,
@@ -71,7 +71,7 @@ export const taskTableData = {
       status: "done",
       due_date: "2024-01-17",
       created_date: "2024-01-12",
-      created_by: 1
+      created_by: 1,
     },
     {
       id: 6,
@@ -83,7 +83,7 @@ export const taskTableData = {
       status: "pending",
       due_date: "2024-01-19",
       created_date: "2024-01-13",
-      created_by: 1
-    }
-  ]
+      created_by: 1,
+    },
+  ],
 };
