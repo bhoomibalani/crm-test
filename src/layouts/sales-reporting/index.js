@@ -153,10 +153,7 @@ function SalesReporting() {
     ),
     remarks: (
       <MDTypography variant="caption" color="text" fontWeight="medium">
-        {report.remarks.length > 30
-          ? `${report.remarks.substring(0, 30)}...`
-          : report.remarks
-        }
+        {report.remarks.length > 30 ? `${report.remarks.substring(0, 30)}...` : report.remarks}
       </MDTypography>
     ),
     actions: (
@@ -269,10 +266,7 @@ function SalesReporting() {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Visited Client</InputLabel>
-                <Select
-                  value={selectedReport?.client_id || ""}
-                  label="Visited Client"
-                >
+                <Select value={selectedReport?.client_id || ""} label="Visited Client">
                   <MenuItem value="1">Client ABC</MenuItem>
                   <MenuItem value="2">Client XYZ</MenuItem>
                   <MenuItem value="3">Client DEF</MenuItem>
@@ -282,10 +276,7 @@ function SalesReporting() {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>New Order</InputLabel>
-                <Select
-                  value={selectedReport?.new_order ? "yes" : "no"}
-                  label="New Order"
-                >
+                <Select value={selectedReport?.new_order ? "yes" : "no"} label="New Order">
                   <MenuItem value="yes">Yes</MenuItem>
                   <MenuItem value="no">No</MenuItem>
                 </Select>

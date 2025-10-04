@@ -133,8 +133,7 @@ function LedgerManagement() {
       <MDTypography variant="caption" color="text" fontWeight="medium">
         {ledger.request_details.length > 50
           ? `${ledger.request_details.substring(0, 50)}...`
-          : ledger.request_details
-        }
+          : ledger.request_details}
       </MDTypography>
     ),
     status: (

@@ -148,8 +148,7 @@ function TaskManagement() {
       <MDTypography variant="caption" color="text" fontWeight="medium">
         {task.description.length > 50
           ? `${task.description.substring(0, 50)}...`
-          : task.description
-        }
+          : task.description}
       </MDTypography>
     ),
     assigned_to: (
@@ -216,7 +215,7 @@ function TaskManagement() {
                   </MDButton>
                 )}
               </MDBox>
-              
+
               <Grid container spacing={2} mb={2}>
                 <Grid item xs={12} md={4}>
                   <MDInput
@@ -297,10 +296,7 @@ function TaskManagement() {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Priority</InputLabel>
-                <Select
-                  value={selectedTask?.priority || TASK_PRIORITY.MEDIUM}
-                  label="Priority"
-                >
+                <Select value={selectedTask?.priority || TASK_PRIORITY.MEDIUM} label="Priority">
                   <MenuItem value={TASK_PRIORITY.LOW}>Low</MenuItem>
                   <MenuItem value={TASK_PRIORITY.MEDIUM}>Medium</MenuItem>
                   <MenuItem value={TASK_PRIORITY.HIGH}>High</MenuItem>
@@ -311,10 +307,7 @@ function TaskManagement() {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Assigned To</InputLabel>
-                <Select
-                  value={selectedTask?.assigned_to_id || ""}
-                  label="Assigned To"
-                >
+                <Select value={selectedTask?.assigned_to_id || ""} label="Assigned To">
                   <MenuItem value="1">John Sales</MenuItem>
                   <MenuItem value="2">Sarah Office</MenuItem>
                   <MenuItem value="3">Mike Sales</MenuItem>
@@ -324,10 +317,7 @@ function TaskManagement() {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Status</InputLabel>
-                <Select
-                  value={selectedTask?.status || TASK_STATUS.PENDING}
-                  label="Status"
-                >
+                <Select value={selectedTask?.status || TASK_STATUS.PENDING} label="Status">
                   <MenuItem value={TASK_STATUS.PENDING}>Pending</MenuItem>
                   <MenuItem value={TASK_STATUS.DONE}>Done</MenuItem>
                   <MenuItem value={TASK_STATUS.COMPLETED}>Completed</MenuItem>

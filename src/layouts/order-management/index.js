@@ -106,8 +106,7 @@ function OrderManagement() {
       <MDTypography variant="caption" color="text" fontWeight="medium">
         {order.order_details.length > 50
           ? `${order.order_details.substring(0, 50)}...`
-          : order.order_details
-        }
+          : order.order_details}
       </MDTypography>
     ),
     status: (
@@ -243,8 +242,7 @@ function OrderManagement() {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Status</InputLabel>
-                <Select
-                  value={selectedOrder?.status || ORDER_STATUS.PENDING} label="Status">
+                <Select value={selectedOrder?.status || ORDER_STATUS.PENDING} label="Status">
                   <MenuItem value={ORDER_STATUS.PENDING}>Pending</MenuItem>
                   <MenuItem value={ORDER_STATUS.ORDERED_WITH_SUPPLIER}>
                     Ordered with Supplier
