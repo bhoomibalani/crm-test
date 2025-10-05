@@ -27,4 +27,4 @@ RUN chmod -R 755 /var/www/html
 EXPOSE 8080
 
 # Start PHP built-in server
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "."]
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t ."]
