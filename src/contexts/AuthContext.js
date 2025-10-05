@@ -5,6 +5,7 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { API_CONFIG, getApiUrl } from "config/api";
 
 const AuthContext = createContext();
 
@@ -19,8 +20,9 @@ export const useAuth = () => {
 // User roles and their permissions
 export const USER_ROLES = {
   ADMIN: "admin",
-  SALES_PERSON: "sales_person",
-  OFFICE_STAFF: "office_staff",
+  MANAGER: "manager",
+  SALES: "sales",
+  OFFICE: "office",
   CLIENT: "client",
 };
 
@@ -69,7 +71,21 @@ const ROLE_PERMISSIONS = {
     PERMISSIONS.VIEW_REPORTS,
     PERMISSIONS.MANAGE_REPORTS,
   ],
-  [USER_ROLES.SALES_PERSON]: [
+  [USER_ROLES.MANAGER]: [
+    PERMISSIONS.VIEW_USERS,
+    PERMISSIONS.MANAGE_ORDERS,
+    PERMISSIONS.VIEW_ORDERS,
+    PERMISSIONS.CREATE_ORDERS,
+    PERMISSIONS.MANAGE_LEDGERS,
+    PERMISSIONS.UPLOAD_LEDGERS,
+    PERMISSIONS.MANAGE_TASKS,
+    PERMISSIONS.VIEW_TASKS,
+    PERMISSIONS.MANAGE_ATTENDANCE,
+    PERMISSIONS.VIEW_ATTENDANCE,
+    PERMISSIONS.VIEW_REPORTS,
+    PERMISSIONS.MANAGE_REPORTS,
+  ],
+  [USER_ROLES.SALES]: [
     PERMISSIONS.VIEW_ORDERS,
     PERMISSIONS.CREATE_ORDERS,
     PERMISSIONS.REQUEST_LEDGERS,
@@ -78,7 +94,7 @@ const ROLE_PERMISSIONS = {
     PERMISSIONS.VIEW_REPORTS,
     PERMISSIONS.MANAGE_REPORTS,
   ],
-  [USER_ROLES.OFFICE_STAFF]: [
+  [USER_ROLES.OFFICE]: [
     PERMISSIONS.VIEW_ORDERS,
     PERMISSIONS.MANAGE_ORDERS,
     PERMISSIONS.VIEW_LEDGERS,
@@ -100,67 +116,87 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored user session
+    // Check for stored user session and verify with backend
     const storedUser = localStorage.getItem("crm_user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const userData = JSON.parse(storedUser);
+      // Verify session with backend
+      verifySession().then((isValid) => {
+        if (isValid) {
+          setUser(userData);
+        } else {
+          localStorage.removeItem("crm_user");
+        }
+        setLoading(false);
+      });
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
+
+  const verifySession = async () => {
+    try {
+      const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.VERIFY), {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+      return data.success;
+    } catch (error) {
+      return false;
+    }
+  };
 
   const login = async (email, password) => {
     setLoading(true);
     try {
-      // Mock authentication - replace with actual API call
-      const mockUsers = [
-        {
-          id: 1,
-          name: "Admin User",
-          email: "admin@rdcompany.com",
-          role: USER_ROLES.ADMIN,
-          permissions: ROLE_PERMISSIONS[USER_ROLES.ADMIN],
+      const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.LOGIN), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          id: 2,
-          name: "John Sales",
-          email: "sales@rdcompany.com",
-          role: USER_ROLES.SALES_PERSON,
-          permissions: ROLE_PERMISSIONS[USER_ROLES.SALES_PERSON],
-        },
-        {
-          id: 3,
-          name: "Office Staff",
-          email: "office@rdcompany.com",
-          role: USER_ROLES.OFFICE_STAFF,
-          permissions: ROLE_PERMISSIONS[USER_ROLES.OFFICE_STAFF],
-        },
-        {
-          id: 4,
-          name: "Client User",
-          email: "client@example.com",
-          role: USER_ROLES.CLIENT,
-          permissions: ROLE_PERMISSIONS[USER_ROLES.CLIENT],
-        },
-      ];
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
 
-      const foundUser = mockUsers.find((u) => u.email === email);
-      if (foundUser) {
-        setUser(foundUser);
-        localStorage.setItem("crm_user", JSON.stringify(foundUser));
-        return { success: true, user: foundUser };
+      const data = await response.json();
+
+      if (data.success) {
+        const userData = {
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          role: data.user.role,
+          permissions: ROLE_PERMISSIONS[data.user.role] || [],
+        };
+
+        setUser(userData);
+        localStorage.setItem("crm_user", JSON.stringify(userData));
+        return { success: true, user: userData };
       } else {
-        return { success: false, error: "Invalid credentials" };
+        return { success: false, error: data.message || "Login failed" };
       }
     } catch (error) {
-      return { success: false, error: "Login failed" };
+      return { success: false, error: "Network error. Please check your connection." };
     } finally {
       setLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("crm_user");
+  const logout = async () => {
+    try {
+      // Call logout API
+      await fetch(getApiUrl(API_CONFIG.ENDPOINTS.LOGOUT), {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("Logout API error:", error);
+    } finally {
+      // Clear local state regardless of API call result
+      setUser(null);
+      localStorage.removeItem("crm_user");
+    }
   };
 
   const hasPermission = (permission) => {

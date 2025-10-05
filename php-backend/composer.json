@@ -1,0 +1,20 @@
+{
+  "name": "rd-company/crm-backend",
+  "description": "RD & Company CRM PHP Backend API",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {},
+  "scripts": {
+    "post-install-cmd": [
+      "php setup.php"
+    ]
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
+
