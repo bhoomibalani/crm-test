@@ -3,7 +3,7 @@
   "description": "RD & Company CRM PHP Backend API",
   "type": "project",
   "require": {
-    "php": ">=7.4"
+    "php": ">=8.0"
   },
   "require-dev": {},
   "scripts": {
