@@ -1,7 +1,0 @@
-[build]
-builder = "dockerfile"
-dockerfilePath = "Dockerfile"
-
-[deploy]
-healthcheckPath = "/api/verify.php"
-healthcheckTimeout = 100

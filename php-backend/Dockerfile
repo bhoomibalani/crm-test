@@ -1,17 +1,11 @@
-# Use Node.js with PHP
-FROM node:18-alpine
+# Use PHP 8.2
+FROM php:8.2-cli
 
-# Install PHP and MySQL extension
-RUN apk add --no-cache php php-pdo php-pdo_mysql
+# Install MySQL extension
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Set working directory
 WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
 
 # Copy application files
 COPY . .
@@ -19,5 +13,5 @@ COPY . .
 # Expose port
 EXPOSE 8080
 
-# Start the application
-CMD ["npm", "start"]
+# Start PHP built-in server
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "."]
