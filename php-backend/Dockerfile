@@ -10,6 +10,9 @@ WORKDIR /app
 # Copy application files
 COPY . .
 
+# Rename composer.json.temp back to composer.json if it exists
+RUN if [ -f composer.json.temp ]; then mv composer.json.temp composer.json; fi
+
 # Expose port
 EXPOSE 8080
 
