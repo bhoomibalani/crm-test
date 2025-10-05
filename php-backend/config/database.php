@@ -9,7 +9,7 @@ class Database {
 
     public function __construct() {
         // Check for Railway MySQL URL first
-        $mysql_url = $_ENV['MYSQL_URL'] ?? $_ENV['DATABASE_URL'] ?? null;
+        $mysql_url = getenv('MYSQL_URL') ?? getenv('DATABASE_URL') ?? null;
         
         if ($mysql_url) {
             // Parse MySQL URL: mysql://user:password@host:port/database
@@ -21,11 +21,11 @@ class Database {
             $this->password = $parsed['pass'];
         } else {
             // Fallback to individual environment variables (Railway uses DB_* prefix)
-            $this->host = $_ENV['DB_HOST'] ?? $_ENV['MYSQL_HOST'] ?? 'localhost';
-            $this->port = $_ENV['DB_PORT'] ?? $_ENV['MYSQL_PORT'] ?? 3306;
-            $this->db_name = $_ENV['DB_NAME'] ?? $_ENV['MYSQL_DATABASE'] ?? 'rd_company_crm';
-            $this->username = $_ENV['DB_USER'] ?? $_ENV['MYSQL_USER'] ?? 'root';
-            $this->password = $_ENV['DB_PASS'] ?? $_ENV['MYSQL_PASSWORD'] ?? 'password';
+            $this->host = getenv('DB_HOST') ?? getenv('MYSQL_HOST') ?? 'localhost';
+            $this->port = getenv('DB_PORT') ?? getenv('MYSQL_PORT') ?? 3306;
+            $this->db_name = getenv('DB_NAME') ?? getenv('MYSQL_DATABASE') ?? 'rd_company_crm';
+            $this->username = getenv('DB_USER') ?? getenv('MYSQL_USER') ?? 'root';
+            $this->password = getenv('DB_PASS') ?? getenv('MYSQL_PASSWORD') ?? 'password';
         }
     }
 
