@@ -1,0 +1,9 @@
+# Ignore everything except what we need for Docker
+node_modules
+.git
+.gitignore
+README.md
+RAILWAY_DEPLOYMENT.md
+SETUP_GUIDE.md
+.env
+*.log
