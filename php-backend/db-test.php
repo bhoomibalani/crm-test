@@ -5,14 +5,15 @@ header("Access-Control-Allow-Origin: *");
 
 // Show environment variables (for debugging)
 $env_vars = array(
+    'DB_HOST' => $_ENV['DB_HOST'] ?? 'not set',
+    'DB_NAME' => $_ENV['DB_NAME'] ?? 'not set',
+    'DB_USER' => $_ENV['DB_USER'] ?? 'not set',
+    'DB_PASS' => $_ENV['DB_PASS'] ? '***' : 'not set',
     'MYSQL_HOST' => $_ENV['MYSQL_HOST'] ?? 'not set',
     'MYSQL_DATABASE' => $_ENV['MYSQL_DATABASE'] ?? 'not set',
     'MYSQL_USER' => $_ENV['MYSQL_USER'] ?? 'not set',
     'MYSQL_PASSWORD' => $_ENV['MYSQL_PASSWORD'] ? '***' : 'not set',
-    'DB_HOST' => $_ENV['DB_HOST'] ?? 'not set',
-    'DB_NAME' => $_ENV['DB_NAME'] ?? 'not set',
-    'DB_USER' => $_ENV['DB_USER'] ?? 'not set',
-    'DB_PASS' => $_ENV['DB_PASS'] ? '***' : 'not set'
+    'MYSQL_URL' => $_ENV['MYSQL_URL'] ? '***' : 'not set'
 );
 
 try {

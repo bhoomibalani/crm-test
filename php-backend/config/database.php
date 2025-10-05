@@ -20,12 +20,12 @@ class Database {
             $this->username = $parsed['user'];
             $this->password = $parsed['pass'];
         } else {
-            // Fallback to individual environment variables
-            $this->host = $_ENV['MYSQL_HOST'] ?? $_ENV['DB_HOST'] ?? 'localhost';
-            $this->port = $_ENV['MYSQL_PORT'] ?? $_ENV['DB_PORT'] ?? 3306;
-            $this->db_name = $_ENV['MYSQL_DATABASE'] ?? $_ENV['DB_NAME'] ?? 'rd_company_crm';
-            $this->username = $_ENV['MYSQL_USER'] ?? $_ENV['DB_USER'] ?? 'root';
-            $this->password = $_ENV['MYSQL_PASSWORD'] ?? $_ENV['DB_PASS'] ?? 'password';
+            // Fallback to individual environment variables (Railway uses DB_* prefix)
+            $this->host = $_ENV['DB_HOST'] ?? $_ENV['MYSQL_HOST'] ?? 'localhost';
+            $this->port = $_ENV['DB_PORT'] ?? $_ENV['MYSQL_PORT'] ?? 3306;
+            $this->db_name = $_ENV['DB_NAME'] ?? $_ENV['MYSQL_DATABASE'] ?? 'rd_company_crm';
+            $this->username = $_ENV['DB_USER'] ?? $_ENV['MYSQL_USER'] ?? 'root';
+            $this->password = $_ENV['DB_PASS'] ?? $_ENV['MYSQL_PASSWORD'] ?? 'password';
         }
     }
 
