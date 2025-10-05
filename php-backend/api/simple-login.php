@@ -1,6 +1,6 @@
 <?php
 // Set CORS headers first
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://crm-test-gamma.vercel.app");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Access-Control-Max-Age: 3600");
