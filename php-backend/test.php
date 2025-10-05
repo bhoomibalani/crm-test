@@ -1,14 +1,14 @@
 <?php
-// Simple health check endpoint for Railway
+// Simple test endpoint without database
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 
-// Basic health check - just return OK
 http_response_code(200);
 echo json_encode(array(
-    "status" => "healthy",
-    "message" => "API is running",
+    "status" => "success",
+    "message" => "PHP server is working",
     "timestamp" => date('Y-m-d H:i:s'),
-    "php_version" => phpversion()
+    "php_version" => phpversion(),
+    "server" => $_SERVER['SERVER_SOFTWARE'] ?? 'Unknown'
 ));
 ?>
