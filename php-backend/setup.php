@@ -51,23 +51,24 @@ $stmt = $pdo->query("SELECT COUNT(*) FROM users");
 $userCount = $stmt->fetchColumn();
 
 if ($userCount == 0) {
-    // Insert sample users
-    $insertUsersSQL = "
-    INSERT INTO users (email, password, name, role) VALUES
-    ('admin@rdcompany.com', ?, 'Admin User', 'admin'),
-    ('manager@rdcompany.com', ?, 'Manager User', 'manager'),
-    ('sales@rdcompany.com', ?, 'Sales User', 'sales'),
-    ('office@rdcompany.com', ?, 'Office User', 'office'),
-    ('client@rdcompany.com', ?, 'Client User', 'client')
-    ";
-    
+    // Insert sample users one by one
     $hashedPassword = password_hash('password123', PASSWORD_DEFAULT);
     
+    $users = [
+        ['admin@rdcompany.com', 'Admin User', 'admin'],
+        ['manager@rdcompany.com', 'Manager User', 'manager'],
+        ['sales@rdcompany.com', 'Sales User', 'sales'],
+        ['office@rdcompany.com', 'Office User', 'office'],
+        ['client@rdcompany.com', 'Client User', 'client']
+    ];
+    
     try {
-        $stmt = $pdo->prepare($insertUsersSQL);
-        for ($i = 0; $i < 5; $i++) {
-            $stmt->execute([$hashedPassword]);
+        $stmt = $pdo->prepare("INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)");
+        
+        foreach ($users as $user) {
+            $stmt->execute([$user[0], $hashedPassword, $user[1], $user[2]]);
         }
+        
         echo "✓ Sample users created\n";
         echo "  - All users have password: password123\n";
     } catch(PDOException $e) {
