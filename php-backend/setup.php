@@ -4,57 +4,25 @@
  * This script helps set up the database and initial configuration
  */
 
-// Database configuration
-$host = "localhost";
-$db_name = "rd_company_crm";
-$username = "root";
-
-// Common password combinations to try
-$passwords = ["", "root", "password", "admin", "123456"];
+// Use the same database configuration as the main app
+include_once 'config/database.php';
 
 echo "RD & Company CRM - PHP Backend Setup\n";
 echo "=====================================\n\n";
 
-// Test database connection with different passwords
-$pdo = null;
-$connected = false;
-
-foreach ($passwords as $password) {
-    try {
-        $pdo = new PDO("mysql:host=$host", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "✓ Database connection successful with password: " . ($password ? "'$password'" : "no password") . "\n";
-        $connected = true;
-        break;
-    } catch(PDOException $e) {
-        echo "✗ Failed with password: " . ($password ? "'$password'" : "no password") . " - " . $e->getMessage() . "\n";
+// Test database connection
+try {
+    $database = new Database();
+    $pdo = $database->getConnection();
+    
+    if (!$pdo) {
+        echo "✗ Database connection failed\n";
+        exit(1);
     }
-}
-
-if (!$connected) {
-    echo "\n✗ Could not connect to MySQL with any common password.\n";
-    echo "Please check:\n";
-    echo "1. MySQL server is running\n";
-    echo "2. Update the password in php-backend/config/database.php\n";
-    echo "3. Or run: mysql -u root -p and set a password\n";
-    exit(1);
-}
-
-// Create database
-try {
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS $db_name");
-    echo "✓ Database '$db_name' created/verified\n";
-} catch(PDOException $e) {
-    echo "✗ Failed to create database: " . $e->getMessage() . "\n";
-    exit(1);
-}
-
-// Connect to the database
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    echo "✗ Failed to connect to database: " . $e->getMessage() . "\n";
+    
+    echo "✓ Database connection successful\n";
+} catch(Exception $e) {
+    echo "✗ Database connection failed: " . $e->getMessage() . "\n";
     exit(1);
 }
 
