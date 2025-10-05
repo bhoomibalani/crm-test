@@ -1,7 +1,7 @@
 // API Configuration
 export const API_CONFIG = {
-  // Railway backend URL
-  BASE_URL: "https://crm-test-production-e9bb.up.railway.app",
+  // Using proxy - no need for full URL
+  BASE_URL: "",
 
   // API Endpoints
   ENDPOINTS: {
