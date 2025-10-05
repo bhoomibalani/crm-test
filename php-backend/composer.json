@@ -3,7 +3,9 @@
   "description": "RD & Company CRM PHP Backend API",
   "type": "project",
   "require": {
-    "php": ">=8.0"
+    "php": ">=8.0",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*"
   },
   "require-dev": {},
   "scripts": {
